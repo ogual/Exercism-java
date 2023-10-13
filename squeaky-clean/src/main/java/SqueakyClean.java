@@ -11,19 +11,17 @@ class SqueakyClean {
 
             if (current == ' ') {
                 result.setCharAt(i, '_');
-            }
-            else if (Character.isISOControl(current)) {
+            } else if (Character.isISOControl(current)) {
                 result.replace(i, i + 1, "CTRL");
-            }
-            else if (!Character.isLetter(current) || (unicode.equals("GREEK") && Character.isLowerCase(current))) {// handle
+            } else if (!Character.isLetter(current) || (unicode.equals("GREEK") && Character.isLowerCase(current))) {// handle
                 if (current == '-') {
                     int next = i + 1;
                     result.setCharAt(next, Character.toUpperCase(result.charAt(next)));
                 }
-                result.deleteCharAt(i);
-                i--;
+                result.deleteCharAt(i--);
             }
         }
+
         return result.toString();
     }
     
