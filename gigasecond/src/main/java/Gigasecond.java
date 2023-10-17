@@ -4,17 +4,19 @@ import java.time.LocalTime;
 import java.time.ZoneOffset;
 
 public class Gigasecond {
-    private long seconds = 0;
 
-    public Gigasecond(LocalDate moment) {
-        this.seconds = moment.toEpochSecond(LocalTime.MIDNIGHT, ZoneOffset.UTC);
-    }
+    private final LocalDateTime moment;
+    private final long GIGASECOND = 1_000_000_000L;
 
-    public Gigasecond(LocalDateTime moment) {
-        this.seconds = moment.toEpochSecond(ZoneOffset.UTC);
+    Gigasecond(LocalDate moment) {
+        this.moment = moment.atStartOfDay();
     }
-
-    public LocalDateTime getDateTime() {
-        return LocalDateTime.ofEpochSecond(this.seconds + 1000000000, 0, ZoneOffset.UTC);
+    Gigasecond(LocalDateTime moment) {
+        this.moment = moment;
     }
+    LocalDateTime getDateTime() {
+        return moment.plusSeconds(GIGASECOND);
+    }
+    
+    
 }
